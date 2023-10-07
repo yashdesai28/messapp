@@ -1,23 +1,22 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:plate_planner/app/data/secure_storage.dart';
 
-import '../controllers/ghome_controller.dart';
+import '../controllers/mhdash_controller.dart';
 
-// class GhomeView extends GetView<GhomeController> {
-//   const GhomeView({Key? key}) : super(key: key);
+// class MhdashView extends GetView<MhdashController> {
+//   const MhdashView({Key? key}) : super(key: key);
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: const Text('GhomeView'),
+//         title: const Text('MhdashView'),
 //         centerTitle: true,
 //       ),
 //       body: const Center(
 //         child: Text(
-//           'GhomeView is working',
+//           'MhdashView is working',
 //           style: TextStyle(fontSize: 20),
 //         ),
 //       ),
@@ -25,15 +24,15 @@ import '../controllers/ghome_controller.dart';
 //   }
 // }
 
-class GhomeView extends StatefulWidget {
-  const GhomeView({super.key});
+class MhdashView extends StatefulWidget {
+  const MhdashView({super.key});
 
   @override
-  State<GhomeView> createState() => _GhomeViewState();
+  State<MhdashView> createState() => _MhdashViewState();
 }
 
-class _GhomeViewState extends State<GhomeView> {
-
+class _MhdashViewState extends State<MhdashView> {
+  
   void initState() {
     super.initState();
 
@@ -59,13 +58,13 @@ class _GhomeViewState extends State<GhomeView> {
     return WillPopScope(
       onWillPop: () async{ return false; },
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(42, 157, 143, 1.000),
+        backgroundColor: Color.fromRGBO(119, 32, 107, 1),
         appBar: AppBar(
           elevation: 0,
           title: Text("Dashboard"),
           centerTitle: true,
           automaticallyImplyLeading: false,
-          backgroundColor: Color.fromRGBO(42, 157, 143, 1.000),
+          backgroundColor: Color.fromRGBO(119, 32, 107, 1),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -125,7 +124,7 @@ class _GhomeViewState extends State<GhomeView> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('/gmenu');
+                                      Get.toNamed('/hmenu');
                                     },
                                     child: Container(
                                       margin:

@@ -1,50 +1,41 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:plate_planner/app/data/secure_storage.dart';
 
-import '../controllers/user_controller.dart';
+import '../controllers/mhuser_controller.dart';
 
-// class UserView extends GetView<UserController> {
-//   //const UserView({Key? key}) : super(key: key);
-
-//   UserController userController=Get.put(UserController());
-
+// class MhuserView extends GetView<MhuserController> {
+//   const MhuserView({Key? key}) : super(key: key);
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//         appBar: AppBar(
-//           title: const Text('UserView'),
-//           centerTitle: true,
+//       appBar: AppBar(
+//         title: const Text('MhuserView'),
+//         centerTitle: true,
+//       ),
+//       body: const Center(
+//         child: Text(
+//           'MhuserView is working',
+//           style: TextStyle(fontSize: 20),
 //         ),
-//         body: Center(
-//           child: Column(
-//             children: [
-//               GetBuilder<UserController>(
-//                 initState: (_)=> userController.onInit(),
-//                 builder: (userController){
-//                   return Text("user view");
-
-//               })
-//             ],
-//           ),
-//         ),
+//       ),
 //     );
 //   }
 // }
 
-class UserView extends StatefulWidget {
-  const UserView({super.key});
+class MhuserView extends StatefulWidget {
+  const MhuserView({super.key});
 
   @override
-  State<UserView> createState() => _UserViewState();
+  State<MhuserView> createState() => _MhuserViewState();
 }
 
-class _UserViewState extends State<UserView> {
+class _MhuserViewState extends State<MhuserView> {
+ 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  UserController userController = Get.put(UserController());
+  MhuserController userController = Get.put(MhuserController());
 
   late String conpass;
 
@@ -151,7 +142,7 @@ class _UserViewState extends State<UserView> {
     return WillPopScope(
       onWillPop: () async{ return false; },
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(42, 157, 143, 1.000),
+        backgroundColor:Color.fromRGBO(119, 32, 107, 1),
         resizeToAvoidBottomInset: true,
         body: Form(
           key: formKey,

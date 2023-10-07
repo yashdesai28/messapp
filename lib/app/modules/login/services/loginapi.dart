@@ -64,6 +64,7 @@ class lApi extends GetxController {
           print('this is a secure :$phonenumber');
 
           securestorage().writesecurestorage('userlogin', phonenumber);
+          securestorage().writesecurestorage('role',user_role);
 
           Get.toNamed("/guesthome");
           return true;
@@ -86,13 +87,29 @@ class lApi extends GetxController {
           Hostelaruser firstUserdata = huser[0];
 
           String phonenumber = firstUserdata.hostelerContactNumber.toString();
-          securestorage().writesecurestorage('userloginh', phonenumber);
+          securestorage().writesecurestorage('userlogin', phonenumber);
+          securestorage().writesecurestorage('role',user_role);
+
           print('this is a secure :$phonenumber');
 
           Get.toNamed("/hostel-home");
           return true;
 
-        } else {
+        }else if(user_role == 'mess_handler' && user_status == 4){
+
+
+
+          String phonenumber = jsonData[1][0]["user_contact_number"].toString();
+
+          print('this is a secure :$phonenumber');
+
+          securestorage().writesecurestorage('userlogin', phonenumber);
+          securestorage().writesecurestorage('role',user_role);
+          Get.toNamed("/messmainhom");
+          return true;
+
+        }
+        else {
           print("not athunticat user role ");
           return false;
 

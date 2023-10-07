@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:plate_planner/app/modules/guesthome/controllers/guesthome_controller.dart';
-import 'package:plate_planner/app/modules/hhome/views/hhome_view.dart';
-import 'package:plate_planner/app/modules/huser/views/huser_view.dart';
+import 'package:plate_planner/app/modules/mhdash/views/mhdash_view.dart';
+import 'package:plate_planner/app/modules/mhuser/views/mhuser_view.dart';
 
-import '../controllers/hostel_home_controller.dart';
+import '../controllers/messmainhom_controller.dart';
 
-// class HostelHomeView extends GetView<HostelHomeController> {
-//   const HostelHomeView({Key? key}) : super(key: key);
+// class MessmainhomView extends GetView<MessmainhomController> {
+//   const MessmainhomView({Key? key}) : super(key: key);
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: const Text('HostelHomeView'),
+//         title: const Text('MessmainhomView'),
 //         centerTitle: true,
 //       ),
 //       body: const Center(
 //         child: Text(
-//           'HostelHomeView is working',
+//           'MessmainhomView is working',
 //           style: TextStyle(fontSize: 20),
 //         ),
 //       ),
@@ -26,18 +25,15 @@ import '../controllers/hostel_home_controller.dart';
 //   }
 // }
 
-class HostelHomeView extends StatefulWidget {
-  const HostelHomeView({super.key});
+class MessmainhomView extends StatefulWidget {
+  const MessmainhomView({super.key});
 
   @override
-  State<HostelHomeView> createState() => _HostelHomeViewState();
+  State<MessmainhomView> createState() => _MessmainhomViewState();
 }
 
-class _HostelHomeViewState extends State<HostelHomeView> {
-//final HostelHomeController controller = Get.put(HostelHomeController());
-
-
-  final HostelHomeController controller = Get.put(HostelHomeController());
+class _MessmainhomViewState extends State<MessmainhomView> {
+ final MessmainhomController controller = Get.put(MessmainhomController());
 
   void initState() {
     super.initState();
@@ -51,7 +47,7 @@ class _HostelHomeViewState extends State<HostelHomeView> {
       body: PageView(
         onPageChanged: controller.gotopage,
         controller: controller.pageController,
-        children: [HhomeView(), HuserView()],
+        children: [MhdashView(),MhuserView()],
       ),
       // Center(
       //   child: Column(

@@ -27,10 +27,14 @@ class forpassApi extends GetxController {
 
       } else if (res.statusCode == 401) {
 
+        print(data["contact_number"]);
         fController.sendotp(data["contact_number"]);
         print("data is avalabel");
         
+        
       }
+      return true;
+
     } catch (e) {
       debugPrint(e.toString());
     }

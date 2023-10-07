@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
+import '../modules/changepassword/bindings/changepassword_binding.dart';
+import '../modules/changepassword/views/changepassword_view.dart';
 import '../modules/forgotpass/bindings/forgotpass_binding.dart';
 import '../modules/forgotpass/views/forgotpass_view.dart';
 import '../modules/ghistory/bindings/ghistory_binding.dart';
@@ -12,6 +14,8 @@ import '../modules/gmenu/bindings/gmenu_binding.dart';
 import '../modules/gmenu/views/gmenu_view.dart';
 import '../modules/guesthome/bindings/guesthome_binding.dart';
 import '../modules/guesthome/views/guesthome_view.dart';
+import '../modules/hattendance/bindings/hattendance_binding.dart';
+import '../modules/hattendance/views/hattendance_view.dart';
 import '../modules/hhome/bindings/hhome_binding.dart';
 import '../modules/hhome/views/hhome_view.dart';
 import '../modules/hmenu/bindings/hmenu_binding.dart';
@@ -24,6 +28,12 @@ import '../modules/huser/bindings/huser_binding.dart';
 import '../modules/huser/views/huser_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/messmainhom/bindings/messmainhom_binding.dart';
+import '../modules/messmainhom/views/messmainhom_view.dart';
+import '../modules/mhdash/bindings/mhdash_binding.dart';
+import '../modules/mhdash/views/mhdash_view.dart';
+import '../modules/mhuser/bindings/mhuser_binding.dart';
+import '../modules/mhuser/views/mhuser_view.dart';
 import '../modules/sign/bindings/sign_binding.dart';
 import '../modules/sign/views/sign_view.dart';
 import '../modules/user/bindings/user_binding.dart';
@@ -121,6 +131,31 @@ class AppPages {
       name: _Paths.HMENU,
       page: () => const HmenuView(),
       binding: HmenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.HATTENDANCE,
+      page: () => const HattendanceView(),
+      binding: HattendanceBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGEPASSWORD,
+      page: () => const ChangepasswordView(),
+      binding: ChangepasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSMAINHOM,
+      page: () => const MessmainhomView(),
+      binding: MessmainhomBinding(),
+    ),
+    GetPage(
+      name: _Paths.MHUSER,
+      page: () => const MhuserView(),
+      binding: MhuserBinding(),
+    ),
+    GetPage(
+      name: _Paths.MHDASH,
+      page: () => const MhdashView(),
+      binding: MhdashBinding(),
     ),
   ];
 }

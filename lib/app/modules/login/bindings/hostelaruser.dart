@@ -1,5 +1,7 @@
 
+import 'dart:async';
 import 'dart:convert';
+
 
 Hostelaruser hostelaruserFromJson(String str) => Hostelaruser.fromJson(json.decode(str));
 

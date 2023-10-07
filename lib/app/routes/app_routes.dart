@@ -19,6 +19,11 @@ abstract class Routes {
   static const HUSER = _Paths.HUSER;
   static const GMENU = _Paths.GMENU;
   static const HMENU = _Paths.HMENU;
+  static const HATTENDANCE = _Paths.HATTENDANCE;
+  static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
+  static const MESSMAINHOM = _Paths.MESSMAINHOM;
+  static const MHUSER = _Paths.MHUSER;
+  static const MHDASH = _Paths.MHDASH;
 }
 
 abstract class _Paths {
@@ -39,4 +44,9 @@ abstract class _Paths {
   static const HUSER = '/huser';
   static const GMENU = '/gmenu';
   static const HMENU = '/hmenu';
+  static const HATTENDANCE = '/hattendance';
+  static const CHANGEPASSWORD = '/changepassword';
+  static const MESSMAINHOM = '/messmainhom';
+  static const MHUSER = '/mhuser';
+  static const MHDASH = '/mhdash';
 }

@@ -14,7 +14,7 @@ class securestorage {
     return value;
   }
 
-  deletesecurestorage(String key, String value) async {
+  deletesecurestorage(String key) async {
     await storage.delete(key: key);
   }
 }

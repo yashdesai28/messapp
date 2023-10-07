@@ -6,13 +6,20 @@ import 'package:get/get.dart';
 import '../controllers/sign_controller.dart';
 import '../services/sapi.dart';
 
-class SignView extends GetView<SignController> {
-  SignView({Key? key}) : super(key: key);
 
+class SignView extends StatefulWidget {
+  const SignView({super.key});
+
+  @override
+  State<SignView> createState() => _SignViewState();
+}
+
+class _SignViewState extends State<SignView> {
+ 
   var sController = Get.put(SignController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late String conpass;
+  late String conpass="";
 
   late int fn = 0;
   late int ln = 0;
@@ -110,6 +117,22 @@ class SignView extends GetView<SignController> {
     }
     c = 1;
     return null;
+  }
+
+
+  
+  bool passwordVisiblep = false;
+  bool passwordVisiblec = false;
+
+  void initState() {
+    super.initState();
+    
+    passwordVisiblep =true;
+    passwordVisiblec = true;
+
+    print("initstae");
+
+    
   }
 
   TextEditingController fname = TextEditingController();
@@ -237,10 +260,24 @@ class SignView extends GetView<SignController> {
                             SizedBox(height: 25),
                             TextFormField(
                               controller: Password,
+                              obscureText: passwordVisiblep,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                   labelText: 'Password',
+                                  suffixIcon: IconButton(
+                                                  icon: Icon(!passwordVisiblep
+                                                      ? Icons.visibility
+                                                      : Icons.visibility_off),
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        passwordVisiblep =
+                                                            !passwordVisiblep;
+                                                      },
+                                                    );
+                                                  },
+                                                ),
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
@@ -249,10 +286,24 @@ class SignView extends GetView<SignController> {
                             SizedBox(height: 25),
                             TextFormField(
                               controller: conpassword,
+                              obscureText: passwordVisiblec,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                   labelText: 'Confim Password',
+                                  suffixIcon: IconButton(
+                                                  icon: Icon(!passwordVisiblec
+                                                      ? Icons.visibility
+                                                      : Icons.visibility_off),
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        passwordVisiblec =
+                                                            !passwordVisiblec;
+                                                      },
+                                                    );
+                                                  },
+                                                ),
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(10.0))),

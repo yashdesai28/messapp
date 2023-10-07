@@ -37,6 +37,7 @@ class GuesthomeView extends StatefulWidget {
 }
 
 class _GuesthomeViewState extends State<GuesthomeView> {
+  
   var sController = Get.put(lApi());
   var datauser = Get.arguments;
 
