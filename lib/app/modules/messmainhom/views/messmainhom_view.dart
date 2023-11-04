@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plate_planner/app/modules/mhdash/views/mhdash_view.dart';
 import 'package:plate_planner/app/modules/mhuser/views/mhuser_view.dart';
+import 'package:plate_planner/app/modules/qrscanner/views/qrscanner_view.dart';
 
 import '../controllers/messmainhom_controller.dart';
 
@@ -47,7 +48,7 @@ class _MessmainhomViewState extends State<MessmainhomView> {
       body: PageView(
         onPageChanged: controller.gotopage,
         controller: controller.pageController,
-        children: [MhdashView(),MhuserView()],
+        children: [MhdashView(),MhuserView(),QrscannerView()],
       ),
       // Center(
       //   child: Column(
@@ -81,7 +82,7 @@ class _MessmainhomViewState extends State<MessmainhomView> {
             children: [
               _bottomAppBarItem(context, icon: 'assets/house.png', page: 0),
               _bottomAppBarItem(context, icon: 'assets/user.png', page: 1),
-              _bottomAppBarItem(context, icon: 'assets/history.png', page: 2),
+              _bottomAppBarItem(context, icon: 'assets/codescan.png', page: 2),
               _bottomAppBarItem(context, icon: 'assets/app.png', page: 3)
             ],
           ),

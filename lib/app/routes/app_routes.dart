@@ -24,6 +24,13 @@ abstract class Routes {
   static const MESSMAINHOM = _Paths.MESSMAINHOM;
   static const MHUSER = _Paths.MHUSER;
   static const MHDASH = _Paths.MHDASH;
+  static const MESSMENU = _Paths.MESSMENU;
+  static const MENUCARD = _Paths.MENUCARD;
+  static const QRCODE = _Paths.QRCODE;
+  static const QRSCANNER = _Paths.QRSCANNER;
+  static const ANALYSIS = _Paths.ANALYSIS;
+  static const GUESTANALYSIS = _Paths.GUESTANALYSIS;
+  static const HOSTELERANALYSIS = _Paths.HOSTELERANALYSIS;
 }
 
 abstract class _Paths {
@@ -49,4 +56,11 @@ abstract class _Paths {
   static const MESSMAINHOM = '/messmainhom';
   static const MHUSER = '/mhuser';
   static const MHDASH = '/mhdash';
+  static const MESSMENU = '/messmenu';
+  static const MENUCARD = '/menucard';
+  static const QRCODE = '/qrcode';
+  static const QRSCANNER = '/qrscanner';
+  static const ANALYSIS = '/analysis';
+  static const GUESTANALYSIS = '/guestanalysis';
+  static const HOSTELERANALYSIS = '/hosteleranalysis';
 }

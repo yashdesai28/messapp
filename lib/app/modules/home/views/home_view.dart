@@ -137,6 +137,24 @@ class _HomeViewState extends State<HomeView> {
 
   HomeController homeController = Get.put(HomeController());
 
+  String message="";
+
+  void didChangeDependencies(){
+
+    super.didChangeDependencies();
+    final arguments= ModalRoute.of(context)!.settings.arguments;
+
+    if(arguments!=null){
+
+      Map? pushArguments=arguments as Map; 
+
+      setState(() {
+        message=pushArguments["message"];
+      });
+
+    }
+  }
+
   
   void initState() {
     super.initState();

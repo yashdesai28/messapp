@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/analysis/bindings/analysis_binding.dart';
+import '../modules/analysis/views/analysis_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/changepassword/bindings/changepassword_binding.dart';
@@ -12,6 +14,8 @@ import '../modules/ghome/bindings/ghome_binding.dart';
 import '../modules/ghome/views/ghome_view.dart';
 import '../modules/gmenu/bindings/gmenu_binding.dart';
 import '../modules/gmenu/views/gmenu_view.dart';
+import '../modules/guestanalysis/bindings/guestanalysis_binding.dart';
+import '../modules/guestanalysis/views/guestanalysis_view.dart';
 import '../modules/guesthome/bindings/guesthome_binding.dart';
 import '../modules/guesthome/views/guesthome_view.dart';
 import '../modules/hattendance/bindings/hattendance_binding.dart';
@@ -24,16 +28,26 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/hostel_home/bindings/hostel_home_binding.dart';
 import '../modules/hostel_home/views/hostel_home_view.dart';
+import '../modules/hosteleranalysis/bindings/hosteleranalysis_binding.dart';
+import '../modules/hosteleranalysis/views/hosteleranalysis_view.dart';
 import '../modules/huser/bindings/huser_binding.dart';
 import '../modules/huser/views/huser_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/menucard/bindings/menucard_binding.dart';
+import '../modules/menucard/views/menucard_view.dart';
 import '../modules/messmainhom/bindings/messmainhom_binding.dart';
 import '../modules/messmainhom/views/messmainhom_view.dart';
+import '../modules/messmenu/bindings/messmenu_binding.dart';
+import '../modules/messmenu/views/messmenu_view.dart';
 import '../modules/mhdash/bindings/mhdash_binding.dart';
 import '../modules/mhdash/views/mhdash_view.dart';
 import '../modules/mhuser/bindings/mhuser_binding.dart';
 import '../modules/mhuser/views/mhuser_view.dart';
+import '../modules/qrcode/bindings/qrcode_binding.dart';
+import '../modules/qrcode/views/qrcode_view.dart';
+import '../modules/qrscanner/bindings/qrscanner_binding.dart';
+import '../modules/qrscanner/views/qrscanner_view.dart';
 import '../modules/sign/bindings/sign_binding.dart';
 import '../modules/sign/views/sign_view.dart';
 import '../modules/user/bindings/user_binding.dart';
@@ -156,6 +170,41 @@ class AppPages {
       name: _Paths.MHDASH,
       page: () => const MhdashView(),
       binding: MhdashBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSMENU,
+      page: () => const MessmenuView(),
+      binding: MessmenuBinding(),
+    ),
+    // GetPage(
+    //   name: _Paths.MENUCARD,
+    //   page: () => const MenucardView(),
+    //   binding: MenucardBinding(),
+    // ),
+    GetPage(
+      name: _Paths.QRCODE,
+      page: () => const QrcodeView(),
+      binding: QrcodeBinding(),
+    ),
+    GetPage(
+      name: _Paths.QRSCANNER,
+      page: () => const QrscannerView(),
+      binding: QrscannerBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANALYSIS,
+      page: () => const AnalysisView(),
+      binding: AnalysisBinding(),
+    ),
+    GetPage(
+      name: _Paths.GUESTANALYSIS,
+      page: () => const GuestanalysisView(),
+      binding: GuestanalysisBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOSTELERANALYSIS,
+      page: () => const HosteleranalysisView(),
+      binding: HosteleranalysisBinding(),
     ),
   ];
 }

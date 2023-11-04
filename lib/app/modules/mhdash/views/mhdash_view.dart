@@ -124,7 +124,7 @@ class _MhdashViewState extends State<MhdashView> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('/hmenu');
+                                      Get.toNamed('/messmenu');
                                     },
                                     child: Container(
                                       margin:
@@ -164,7 +164,7 @@ class _MhdashViewState extends State<MhdashView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('/user');
+                                    Get.toNamed('/analysis');
                                     },
                                     child: Container(
                                       margin: EdgeInsets.all(25),

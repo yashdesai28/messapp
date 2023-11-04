@@ -34,7 +34,7 @@ class ChangepasswordView extends StatefulWidget {
 class _ChangepasswordViewState extends State<ChangepasswordView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late String conpass;
+  late String conpass="";
 
   late int p = 0;
   late int c = 0;

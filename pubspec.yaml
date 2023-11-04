@@ -16,6 +16,14 @@ dependencies:
   firebase_auth: ^4.9.0
   http: ^1.1.0
   flutter_secure_storage: ^9.0.0
+  swipeable_card_stack: ^0.0.5
+  flutter_swipable: ^1.2.1
+  swipable_stack: ^2.0.0
+  firebase_messaging: ^14.7.2
+  firebase_analytics: ^10.6.2
+  qr_flutter: ^4.1.0
+  qr_code_scanner: ^1.0.1
+  
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

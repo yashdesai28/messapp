@@ -43,6 +43,11 @@ class _GuesthomeViewState extends State<GuesthomeView> {
 
   final GuesthomeController controller = Get.put(GuesthomeController());
 
+  void initState() {
+    super.initState();
+    controller.onInit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

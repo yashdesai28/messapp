@@ -28,6 +28,29 @@ class HmenuController extends GetxController {
   }
 }
 
+
+  Future fetchmenudatanext() async {
+  final response = await http
+      .post(Uri.parse('http://192.168.43.54:8080/shownextmenu'));
+
+  print("this is hmenu controller");
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    
+    print(response.body);
+    List<Menudata> jsonData = menudataFromJson(response.body);
+    
+
+      return jsonData;
+      
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
   final count = 0.obs;
   @override
   void onInit() {

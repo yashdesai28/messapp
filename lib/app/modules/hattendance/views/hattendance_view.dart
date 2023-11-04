@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:plate_planner/app/data/secure_storage.dart';
 
 import '../controllers/hattendance_controller.dart';
 
@@ -31,15 +32,57 @@ class HattendanceView extends StatefulWidget {
 }
 
 class _HattendanceViewState extends State<HattendanceView> {
-  bool isChecked = false;
+  HattendanceController hattendanceController =
+      Get.put(HattendanceController());
+  // bool isChecked = false;
+  List<bool> isCheckedList = [false, false, false];
+
+  void initState() {
+    super.initState();
+
+    print("initstae");
+
+    lod();
+  }
+
+  Future<void> lod() async {
+    DateTime currentDate = DateTime.now();
+
+    // Format the date as a string
+    String formattedDate =
+        "${currentDate.day}/${currentDate.month}/${currentDate.year}";
+    var sec = await securestorage().readmealsdata('bookmeals');
+    
+    print(sec);
+    print(formattedDate);
+
+    if (sec == formattedDate) {
+      print("match");
+      securestorage().deletemealsdata('bookmeals');
+    } else {
+      
+      Get.toNamed('/qrcode');
+    }
+
+    print(sec);
+    print(formattedDate);
+  }
 
   @override
   Widget build(BuildContext context) {
     DateTime currentDate = DateTime.now();
 
-    // Format the date as a string
-    String formattedDate =
-        "${currentDate.day}-${currentDate.month}-${currentDate.year}";
+    // Get the next day
+    DateTime nextDay = currentDate.add(Duration(days: 1));
+
+    // Format the dates
+    String currentFormatted =
+        "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+    String formattedDate = "${nextDay.day}-${nextDay.month}-${nextDay.year}";
+
+    print("Current date: $currentFormatted");
+    print("Next day and date: $formattedDate");
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(136, 74, 178, 1.000),
       appBar: AppBar(
@@ -86,17 +129,16 @@ class _HattendanceViewState extends State<HattendanceView> {
                         Expanded(
                             child: Stack(children: <Widget>[
                           Container(
-                            height: MediaQuery.of(context).size.height-350,
+                            height: MediaQuery.of(context).size.height - 350,
                             decoration: BoxDecoration(
-                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromARGB(255, 17, 17, 17), 
-                                                  blurRadius: 25.0,
-                                                  spreadRadius: 1.0,
-                                                  offset: Offset(7.0, 7.0),
-                                                ),
-                                                
-                                              ],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 17, 17, 17),
+                                    blurRadius: 25.0,
+                                    spreadRadius: 1.0,
+                                    offset: Offset(7.0, 7.0),
+                                  ),
+                                ],
                                 color: Color.fromARGB(255, 255, 255, 255),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(40),
@@ -180,10 +222,10 @@ class _HattendanceViewState extends State<HattendanceView> {
                                         children: [
                                           Checkbox(
                                             checkColor: Colors.white,
-                                            value: isChecked,
+                                            value: isCheckedList[0],
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isChecked = value!;
+                                                isCheckedList[0] = value!;
                                               });
                                             },
                                           ),
@@ -195,10 +237,10 @@ class _HattendanceViewState extends State<HattendanceView> {
                                         children: [
                                           Checkbox(
                                             checkColor: Colors.white,
-                                            value: isChecked,
+                                            value: isCheckedList[1],
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isChecked = value!;
+                                                isCheckedList[1] = value!;
                                               });
                                             },
                                           ),
@@ -210,10 +252,11 @@ class _HattendanceViewState extends State<HattendanceView> {
                                         children: [
                                           Checkbox(
                                             checkColor: Colors.white,
-                                            value: isChecked,
+                                            value: isCheckedList[2],
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isChecked = value!;
+                                                isCheckedList[2] = value!;
+                                                print(isCheckedList[2]);
                                               });
                                             },
                                           ),
@@ -243,7 +286,8 @@ class _HattendanceViewState extends State<HattendanceView> {
                                     minWidth: double.infinity,
                                     height: 60,
                                     onPressed: () {
-                                      Get.toNamed('/login');
+                                      hattendanceController
+                                          .bookedmeals(isCheckedList);
                                     },
                                     child: Text(
                                       "Submit",

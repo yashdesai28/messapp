@@ -165,7 +165,7 @@ class _GhomeViewState extends State<GhomeView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('/user');
+                                     // Get.toNamed('/user');
                                     },
                                     child: Container(
                                       margin: EdgeInsets.all(25),

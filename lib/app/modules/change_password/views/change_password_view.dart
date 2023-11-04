@@ -32,13 +32,14 @@ class ChangePasswordView extends StatefulWidget {
 
 class _ChangePasswordViewState extends State<ChangePasswordView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  
-  void submitform(){
-    if(formKey.currentState!.validate()){
+
+  void submitform() {
+    if (formKey.currentState!.validate()) {
       //      print("valid");
     }
   }
-  late String conpass;
+
+  late String conpass="";
 
   late int p = 0;
   late int c = 0;
@@ -74,6 +75,18 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
 
   TextEditingController Password = TextEditingController();
   TextEditingController conpassword = TextEditingController();
+
+  bool passwordVisiblep = false;
+  bool passwordVisiblec = false;
+
+  void initState() {
+    super.initState();
+
+    passwordVisiblep = true;
+    passwordVisiblec = true;
+
+    print("initstae");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +137,22 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
               ),
               TextFormField(
                 controller: Password,
+                      obscureText: passwordVisiblep,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: InputDecoration(
                     labelText: 'Password',
+                    suffixIcon: IconButton(
+                      icon: Icon(!passwordVisiblep
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisiblep = !passwordVisiblep;
+                          },
+                        );
+                      },
+                    ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0))),
                 validator: validatepass,
@@ -134,9 +160,22 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
               SizedBox(height: 25),
               TextFormField(
                 controller: conpassword,
+                      obscureText: passwordVisiblec,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: InputDecoration(
                     labelText: 'Confim Password',
+                    suffixIcon: IconButton(
+                      icon: Icon(!passwordVisiblec
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisiblec = !passwordVisiblec;
+                          },
+                        );
+                      },
+                    ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0))),
                 validator: validateconpass,
@@ -153,35 +192,38 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {
-                      
-                                
-      
-                                if(p==1&&c==1){
-                                  print("validation is all ok");
-                                      //sController.sendotp(phone.text.trim());
-                                      //Get.toNamed('/verification');
+                      if (p == 1 && c == 1) {
+                        print("validation is all ok");
+                        //sController.sendotp(phone.text.trim());
+                        //Get.toNamed('/verification');
 
-                                      var data={
-                                        "contact_number":Get.arguments,
-                                        "hpassword": Password.text,
-                                        "chpassword": conpassword.text
-                                      };
-                                  print(Get.arguments);
-                                  ChangePasswordController.updatepassword(data);
-                                }
-                                else{
-                                  //Get.toNamed('/verification');
-                                  Get.snackbar("","",
-                                    titleText: Text("somthing worng",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-                                    messageText: Text("meassage proper",style: TextStyle( color: Colors.white)),
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    backgroundColor: Colors.black,
-                                    forwardAnimationCurve: Curves.bounceInOut,
-                                    margin: EdgeInsets.all(10),
-                                    );
-                                  print("validation is not ok ");
-                                  
-                                }
+                        var data = {
+                          "contact_number": Get.arguments,
+                          "hpassword": Password.text,
+                          "chpassword": conpassword.text
+                        };
+                        print(Get.arguments);
+                        ChangePasswordController.updatepassword(data);
+                      } else {
+                        //Get.toNamed('/verification');
+                        Get.snackbar(
+                          "",
+                          "",
+                          titleText: Text(
+                            "somthing worng",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          messageText: Text("meassage proper",
+                              style: TextStyle(color: Colors.white)),
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.black,
+                          forwardAnimationCurve: Curves.bounceInOut,
+                          margin: EdgeInsets.all(10),
+                        );
+                        print("validation is not ok ");
+                      }
                     },
                     child: Text("Update")),
               )
