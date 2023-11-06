@@ -9,7 +9,7 @@ import 'package:plate_planner/app/modules/login/bindings/usermodel.dart';
 import 'package:plate_planner/app/modules/sign/controllers/sign_controller.dart';
 
 class lApi extends GetxController {
-  static const baseurl = "http://192.168.43.54:8080/login";
+  static const baseurl = "http://172.20.10.3:8080/login";
 
   var _isLoading = true.obs;
 

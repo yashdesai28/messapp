@@ -5,7 +5,7 @@ import 'package:plate_planner/app/data/secure_storage.dart';
 class HuserController extends GetxController {
   //TODO: Implement HuserController
 
-  static const baseurl = "http://192.168.43.54:8080/showh";
+  static const baseurl = "http://172.20.10.3:8080/showh";
 
   String pho = '';
   String fname='';
@@ -25,7 +25,7 @@ class HuserController extends GetxController {
   final count = 0.obs;
   @override
   Future<void> onInit()  async {
-    pho = await securestorage().readsecurestorage('userloginh');
+    pho = await securestorage().readsecurestorage('userlogin');
 
     var data = {
       "contact_number": pho,

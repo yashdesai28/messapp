@@ -31,6 +31,7 @@ abstract class Routes {
   static const ANALYSIS = _Paths.ANALYSIS;
   static const GUESTANALYSIS = _Paths.GUESTANALYSIS;
   static const HOSTELERANALYSIS = _Paths.HOSTELERANALYSIS;
+  static const GQRCODE = _Paths.GQRCODE;
 }
 
 abstract class _Paths {
@@ -63,4 +64,5 @@ abstract class _Paths {
   static const ANALYSIS = '/analysis';
   static const GUESTANALYSIS = '/guestanalysis';
   static const HOSTELERANALYSIS = '/hosteleranalysis';
+  static const GQRCODE = '/gqrcode';
 }

@@ -8,7 +8,7 @@ class HmenuController extends GetxController {
 
   Future fetchmenudata() async {
   final response = await http
-      .post(Uri.parse('http://192.168.43.54:8080/smenu'));
+      .post(Uri.parse('http://172.20.10.3:8080/smenu'));
 
   print("this is hmenu controller");
   if (response.statusCode == 200) {
@@ -31,7 +31,7 @@ class HmenuController extends GetxController {
 
   Future fetchmenudatanext() async {
   final response = await http
-      .post(Uri.parse('http://192.168.43.54:8080/shownextmenu'));
+      .post(Uri.parse('http://172.20.10.3:8080/shownextmenu'));
 
   print("this is hmenu controller");
   if (response.statusCode == 200) {

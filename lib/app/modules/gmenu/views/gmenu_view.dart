@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:plate_planner/app/data/secure_storage.dart';
 import 'package:plate_planner/app/modules/hmenu/bindings/menumodel.dart';
 import 'package:plate_planner/app/modules/hmenu/controllers/hmenu_controller.dart';
-
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:flutter_spinbox/flutter_spinbox.dart';
 import '../controllers/gmenu_controller.dart';
 
 // class GmenuView extends GetView<GmenuController> {
@@ -33,14 +35,64 @@ class GmenuView extends StatefulWidget {
 }
 
 class _GmenuViewState extends State<GmenuView> {
+  var _razorpay;
+
   HmenuController controller = Get.put(HmenuController());
 
+  GmenuController gmenuController = Get.put(GmenuController());
+
+  double price = 50;
+  double hon = 100;
+  double? rezor;
+  double quantity = 1;
+
   void initState() {
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     super.initState();
 
     print("initstae");
 
     lod();
+  }
+
+  Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    // Do something when payment succeeds
+
+    print("payment done");
+
+    sentdatacontroller();
+  }
+
+  Future<void> sentdatacontroller() async {
+    var pho = await securestorage().readsecurestorage('userlogin');
+
+    print("quantity = $quantity");
+    print("price = $price");
+
+    var data = {
+      "contact_number": pho.toString(),
+      "quantity": quantity.toString(),
+      "amount": price.toString(),
+    };
+
+    print(data);
+
+    // // Introduce a delay of 3 seconds before calling gfetchmenudata
+    // await Future.delayed(Duration(seconds: 3));
+
+    await gmenuController.gfetchmenudata(data);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+    print("error in payemnt");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
   }
 
   late List<Menudata> jsonData;
@@ -50,7 +102,24 @@ class _GmenuViewState extends State<GmenuView> {
   String lunch = '';
 
   Future<void> lod() async {
+    
+    var chek= await gmenuController.chekmeals();
+
+    print("gmenu view said = ${chek}");
+    print(chek[0]["mes"]);
+
+    if(chek[0]["mes"]=="not data"){
+
+      print("no data is match");
+    }
+    else{
+        Get.toNamed('/gqrcode');
+    }
+
+    
+
     jsonData = await controller.fetchmenudata();
+
     // Print the data
     jsonData.forEach((menu) {
       print('ID: ${menu.id}');
@@ -97,7 +166,8 @@ class _GmenuViewState extends State<GmenuView> {
             Expanded(
                 child: Stack(children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height - 180,
+                height: MediaQuery.of(context).size.height - 250,
+                width: double.infinity,
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -117,7 +187,7 @@ class _GmenuViewState extends State<GmenuView> {
               Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height - 420,
+                    height: MediaQuery.of(context).size.height - 460,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height - 530,
@@ -177,7 +247,39 @@ class _GmenuViewState extends State<GmenuView> {
                 ],
               )
             ])),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Quantity",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )
+              ],
+            ),
+            Container(
+              width: 300,
+              decoration: BoxDecoration(
+                color: Colors.blue, // Set the background color
+                borderRadius:
+                    BorderRadius.circular(10), // Optional: Apply border radius
+              ),
+              child: SpinBox(
+                  min: 1,
+                  max: 100,
+                  value: 1,
+                  onChanged: (value) {
+                    setState(() {
+                      quantity = value;
+                      price = 50 * value;
+                    });
+                  }),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Container(
               margin: EdgeInsets.only(bottom: 17),
               width: 310,
@@ -203,10 +305,28 @@ class _GmenuViewState extends State<GmenuView> {
                 minWidth: double.infinity,
                 height: 60,
                 onPressed: () {
-                  Get.toNamed('/login');
+                  rezor = price * hon;
+                  print("rzo");
+                  var options = {
+                    'key': 'rzp_test_PThWulOiktMSCZ',
+                    'amount': rezor,
+                    //'amount': 100,
+                    'name': 'Plate Planner',
+                    'description': 'booking meals',
+                    'timeout': 300, // in seconds
+                  };
+
+                  try {
+                    _razorpay.open(options);
+                  } catch (e) {
+                    debugPrint('Error:e');
+                  }
+
+                  //sentdatacontroller();
+                  
                 },
                 child: Text(
-                  "Pay ₹50",
+                  "Pay ₹${price}",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -219,5 +339,10 @@ class _GmenuViewState extends State<GmenuView> {
         ),
       ),
     );
+  }
+
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
   }
 }

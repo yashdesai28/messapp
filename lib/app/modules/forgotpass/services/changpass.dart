@@ -6,7 +6,7 @@ import 'package:plate_planner/app/modules/sign/controllers/sign_controller.dart'
 
 class forpassApi extends GetxController {
   
-  static const baseurl = "http://192.168.43.54:8080/user";
+  static const baseurl = "http://172.20.10.3:8080/user";
   
 //http://172.20.10.3/user
   static password(Map data) async {

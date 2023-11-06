@@ -5,17 +5,15 @@ import 'package:http/http.dart' as http;
 
 class HosteleranalysisController extends GetxController {
   //TODO: Implement HosteleranalysisController
+  
 
   Future fetchmenudata() async {
     final response =
-        await http.post(Uri.parse('http://192.168.43.54:8080/analysis'));
+        await http.post(Uri.parse('http://172.20.10.3:8080/analysis'));
 
     print("this is hmenu controller");
     if (response.statusCode == 200) {
-
-    
-       var analysis_data = json.decode(response.body);
-
+      var analysis_data = json.decode(response.body);
 
       print(analysis_data["total_current_booking"]);
       print(response.body);

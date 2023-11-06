@@ -46,26 +46,22 @@ class _HattendanceViewState extends State<HattendanceView> {
   }
 
   Future<void> lod() async {
-    DateTime currentDate = DateTime.now();
+   
+  var chek =await hattendanceController.chekmeals();
 
-    // Format the date as a string
-    String formattedDate =
-        "${currentDate.day}/${currentDate.month}/${currentDate.year}";
-    var sec = await securestorage().readmealsdata('bookmeals');
-    
-    print(sec);
-    print(formattedDate);
+  print(chek);
 
-    if (sec == formattedDate) {
-      print("match");
-      securestorage().deletemealsdata('bookmeals');
-    } else {
-      
-      Get.toNamed('/qrcode');
+  
+    print("gmenu view said = ${chek}");
+    print(chek[0]["mes"]);
+
+    if(chek[0]["mes"]=="not data"){
+
+      print("no data is match");
     }
-
-    print(sec);
-    print(formattedDate);
+    else{
+        Get.toNamed('/qrcode');
+    }
   }
 
   @override

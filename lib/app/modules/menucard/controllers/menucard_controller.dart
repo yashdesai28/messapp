@@ -3,7 +3,7 @@ import 'package:plate_planner/app/modules/hmenu/bindings/menumodel.dart';
 import 'package:http/http.dart' as http;
 
 class MenucardController extends GetxController {
-  static const baseurl = "http://192.168.43.54:8080/showmenu";
+  static const baseurl = "http://172.20.10.3:8080/showmenu";
   //TODO: Implement MenucardController
   Future fetchmenudata(String days) async {
 

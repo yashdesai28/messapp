@@ -7,133 +7,185 @@ import 'package:http/http.dart' as http;
 
 class QrscannerController extends GetxController {
   //TODO: Implement QrscannerController
-  static const baseurl = "http://192.168.43.54:8080/hatt";
-  Future qrscan(var data) async {
-    var pho = await securestorage().readsecurestorage('userloginh');
+  static const baseurl = "http://172.20.10.3:8080/hatt";
+   static const gbaseurl = "http://172.20.10.3:8080/ghatt";
 
-    print("pho $pho");
+  Future qrscan(var data) async {
+    //var pho = await securestorage().readsecurestorage('userlogin');
+
+    //print("pho $pho");
     print("this is a scanner qr ${data}");
 
     List<Map<String, dynamic>> jsonDataList =
         List<Map<String, dynamic>>.from(json.decode(data));
     print(jsonDataList);
 
-    print(jsonDataList[0]["lunch"]);
+    print(jsonDataList[0]["amount"]);
 
-    bool dinner = jsonDataList[0]["dinner"];
-    bool lunch = jsonDataList[0]["lunch"];
-    bool breakfast = jsonDataList[0]["breakfast"];
-    bool breakfast_attendance = jsonDataList[0]["breakfast_attendance"];
-    bool lunch_attendance = jsonDataList[0]["lunch_attendance"];
-    bool dinner_attendance = jsonDataList[0]["dinner_attendance"];
+    if (jsonDataList[0]["amount"] == null) {
+      print("hosteler======= qrcode ");
 
-    String date = jsonDataList[0]["date"];
+      print(jsonDataList[0]["lunch"]);
 
-    print(dinner);
+      bool dinner = jsonDataList[0]["dinner"];
+      bool lunch = jsonDataList[0]["lunch"];
+      bool breakfast = jsonDataList[0]["breakfast"];
+      bool breakfast_attendance = jsonDataList[0]["breakfast_attendance"];
+      bool lunch_attendance = jsonDataList[0]["lunch_attendance"];
+      bool dinner_attendance = jsonDataList[0]["dinner_attendance"];
 
-    DateTime now = DateTime.now();
-    TimeOfDay currentTime = TimeOfDay.fromDateTime(now);
+      String date = jsonDataList[0]["date"];
+      String pho = jsonDataList[0]["contact_number"].toString();
 
-    // Define the start and end times for the evening range (6:00 PM to 8:00 PM)
-    TimeOfDay startTimeEvening = TimeOfDay(hour: 18, minute: 0); // 6:00 PM
-    TimeOfDay endTimeEvening = TimeOfDay(hour: 22, minute: 0); // 8:00 PM
+      print(dinner);
 
-    // Define the start and end times for the day range (10:00 AM to 2:00 PM)
-    TimeOfDay startTimeDay = TimeOfDay(hour: 10, minute: 0); // 10:00 AM
-    TimeOfDay endTimeDay = TimeOfDay(hour: 14, minute: 0); // 2:00 PM
+      DateTime now = DateTime.now();
+      TimeOfDay currentTime = TimeOfDay.fromDateTime(now);
 
-    // Define the start and end times for the morning range (7:00 AM to 9:00 AM)
-    TimeOfDay startTimeMorning = TimeOfDay(hour: 7, minute: 0); // 7:00 AM
-    TimeOfDay endTimeMorning = TimeOfDay(hour: 9, minute: 0); // 9:00 AM
+      // Define the start and end times for the evening range (6:00 PM to 8:00 PM)
+      TimeOfDay startTimeEvening = TimeOfDay(hour: 18, minute: 0); // 6:00 PM
+      TimeOfDay endTimeEvening = TimeOfDay(hour: 23, minute: 0); // 8:00 PM
 
-    // Check if the current time is within the specified evening range
-    if (isTimeInRange(currentTime, startTimeEvening, endTimeEvening)) {
-      print("Current time is between 6:00 PM and 8:00 PM");
+      // Define the start and end times for the day range (10:00 AM to 2:00 PM)
+      TimeOfDay startTimeDay = TimeOfDay(hour: 10, minute: 0); // 10:00 AM
+      TimeOfDay endTimeDay = TimeOfDay(hour: 14, minute: 0); // 2:00 PM
 
-      if (dinner == true) {
-        if (dinner_attendance == false) {
-          var data = {"contact_number": pho, "date": date, "typef": "d1"};
+      // Define the start and end times for the morning range (7:00 AM to 9:00 AM)
+      TimeOfDay startTimeMorning = TimeOfDay(hour: 7, minute: 0); // 7:00 AM
+      TimeOfDay endTimeMorning = TimeOfDay(hour: 9, minute: 0); // 9:00 AM
 
-          print(data);
+      // Check if the current time is within the specified evening range
+      if (isTimeInRange(currentTime, startTimeEvening, endTimeEvening)) {
+        print("Current time is between 6:00 PM and 8:00 PM");
 
-          print("thiss iss qr sanner   services ");
-          var uri = Uri.parse(baseurl);
-          final res = await http.post(uri, body: data);
+        if (dinner == true) {
+          if (dinner_attendance == false) {
+            var data = {"contact_number": pho, "date": date, "typef": "d1"};
 
-          if (res.statusCode == 200) {
-            return "modification";
+            print(data);
+
+            print("thiss iss qr sanner   services ");
+            var uri = Uri.parse(baseurl);
+            final res = await http.post(uri, body: data);
+
+            if (res.statusCode == 200) {
+              return "modification";
+            } else {
+              return "not modification";
+            }
           } else {
-            return "not modification";
+            return "binner is already having you";
           }
         } else {
-          return "binner is already having you";
+          return "not booking dinner";
         }
       } else {
-        return "not booking dinner";
+        print("Current time is outside the evening range");
       }
-    } else {
-      print("Current time is outside the evening range");
-    }
 
-    // Check if the current time is within the specified day range
-    if (isTimeInRange(currentTime, startTimeDay, endTimeDay)) {
-      print("Current time is between 10:00 AM and 2:00 PM");
+      // Check if the current time is within the specified day range
+      if (isTimeInRange(currentTime, startTimeDay, endTimeDay)) {
+        print("Current time is between 10:00 AM and 2:00 PM");
 
-      if (lunch == true) {
-        if (lunch_attendance == false) {
-          var data = {"contact_number": pho, "date": date, "typef": "l1"};
+        if (lunch == true) {
+          if (lunch_attendance == false) {
+            var data = {"contact_number": pho, "date": date, "typef": "l1"};
 
-          print(data);
+            print(data);
 
-          print("thiss iss qr sanner   services ");
-          var uri = Uri.parse(baseurl);
-          final res = await http.post(uri, body: data);
+            print("thiss iss qr sanner   services ");
+            var uri = Uri.parse(baseurl);
+            final res = await http.post(uri, body: data);
 
-          if (res.statusCode == 200) {
-            return "modification";
+            if (res.statusCode == 200) {
+              return "modification";
+            } else {
+              return "not modification";
+            }
           } else {
-            return "not modification";
+            return "binner is already having you";
           }
         } else {
-          return "binner is already having you";
+          return "not booking lunch";
         }
       } else {
-        return "not booking dinner";
+        print("Current time is outside the day range");
       }
-    } else {
-      print("Current time is outside the day range");
-    }
 
-    // Check if the current time is within the specified morning range
-    if (isTimeInRange(currentTime, startTimeMorning, endTimeMorning)) {
-      print("Current time is between 7:00 AM and 9:00 AM");
+      // Check if the current time is within the specified morning range
+      if (isTimeInRange(currentTime, startTimeMorning, endTimeMorning)) {
+        print("Current time is between 7:00 AM and 9:00 AM");
 
-      if (breakfast == true) {
-        if (breakfast_attendance == false) {
-          var data = {"contact_number": pho, "date": date, "typef": "b1"};
+        if (breakfast == true) {
+          if (breakfast_attendance == false) {
+            var data = {"contact_number": pho, "date": date, "typef": "b1"};
 
-          print(data);
+            print(data);
 
-          print("thiss iss qr sanner   services ");
-          var uri = Uri.parse(baseurl);
-          final res = await http.post(uri, body: data);
+            print("thiss iss qr sanner   services ");
+            var uri = Uri.parse(baseurl);
+            final res = await http.post(uri, body: data);
 
-          if (res.statusCode == 200) {
-            return "modification";
+            if (res.statusCode == 200) {
+              return "modification";
+            } else {
+              return "not modification";
+            }
           } else {
-            return "not modification";
+            return "binner is already having you";
           }
         } else {
-          return "binner is already having you";
+          return "not booking breakfast";
         }
       } else {
-        return "not booking dinner";
+        print("Current time is outside the morning range");
       }
-    } else {
-      print("Current time is outside the morning range");
-    }
 
-    return "Current time is outside the morning and evening afternoon ";
+      return "Current time is outside the morning and evening afternoon ";
+    } else {
+      //guest qrcode is
+      print("guest qr code ");
+
+      bool lunch = jsonDataList[0]["lunch"];
+      String date = jsonDataList[0]["date"];
+      String pho = jsonDataList[0]["contact_number"].toString();
+      bool lunch_attendance = jsonDataList[0]["lunch_attendance"];
+
+      DateTime now = DateTime.now();
+      TimeOfDay currentTime = TimeOfDay.fromDateTime(now);
+      // Define the start and end times for the day range (10:00 AM to 2:00 PM)
+      TimeOfDay startTimeDay = TimeOfDay(hour: 10, minute: 0); // 10:00 AM
+      TimeOfDay endTimeDay = TimeOfDay(hour: 22, minute: 0); // 2:00 PM
+
+      // Check if the current time is within the specified day range
+      if (isTimeInRange(currentTime, startTimeDay, endTimeDay)) {
+        print("Current time is between 10:00 AM and 2:00 PM");
+
+        if (lunch == true) {
+          if (lunch_attendance == false) {
+            var data = {"contact_number": pho, "date": date, "typef": "l1"};
+
+            print(data);
+
+            print("thiss iss qr sanner   services ");
+            var uri = Uri.parse(gbaseurl);
+            final res = await http.post(uri, body: data);
+
+            if (res.statusCode == 200) {
+              return "modification";
+            } else {
+              return "not modification";
+            }
+          } else {
+            return "binner is already having you";
+          }
+        } else {
+          return "not booking lunch";
+        }
+      }
+
+      return "somthing wenst worng  ";
+    }
   }
 
   bool isTimeInRange(

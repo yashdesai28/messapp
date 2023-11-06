@@ -5,7 +5,7 @@ import 'package:plate_planner/app/modules/sign/controllers/sign_controller.dart'
 
 class adduApi extends GetxController {
   
-  static const baseurl = "http://192.168.43.54:8080/greg";
+  static const baseurl = "http://172.20.10.3:8080/greg";
   
 //http://172.20.10.3/user
   static adduser(Map data) async {

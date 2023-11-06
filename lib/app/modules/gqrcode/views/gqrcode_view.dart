@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
-import '../controllers/qrcode_controller.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class QrcodeView extends StatefulWidget {
-  const QrcodeView({super.key});
+import '../controllers/gqrcode_controller.dart';
+
+// class GqrcodeView extends GetView<GqrcodeController> {
+//   const GqrcodeView({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('GqrcodeView'),
+//         centerTitle: true,
+//       ),
+//       body: const Center(
+//         child: Text(
+//           'GqrcodeView is working',
+//           style: TextStyle(fontSize: 20),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class GqrcodeView extends StatefulWidget {
+  const GqrcodeView({super.key});
 
   @override
-  State<QrcodeView> createState() => _QrcodeViewState();
+  State<GqrcodeView> createState() => _GqrcodeViewState();
 }
 
-class _QrcodeViewState extends State<QrcodeView> {
-  QrcodeController controller = Get.put(QrcodeController());
+class _GqrcodeViewState extends State<GqrcodeView> {
+  GqrcodeController controller = Get.put(GqrcodeController());
 
   void initState() {
     super.initState();
@@ -29,12 +48,13 @@ class _QrcodeViewState extends State<QrcodeView> {
   Future<void> lod() async {
     print("this is lod in qr scanner ");
 
-    var chek=await controller.chekmeals();
+    var chek= await controller.chekmeals();
 
-    print("qrcode view said");
-    print(chek);
 
-    var data1 = await controller.showmeals();
+    print("gmenu view said = ${chek}");
+    print(chek[0]["mes"]);
+
+    var data1 = await controller.gshowmeals();
 
     setState(() {
       data = data1;
@@ -62,7 +82,7 @@ class _QrcodeViewState extends State<QrcodeView> {
           backgroundColor: Color.fromRGBO(119, 32, 107, 1),
           leading: IconButton(
               onPressed: () {
-                Get.toNamed('/hostel-home');
+                Get.toNamed('/guesthome');
               },
               icon: Icon(Icons.arrow_back_ios,
                   size: 20, color: const Color.fromARGB(255, 255, 255, 255))),
@@ -86,6 +106,16 @@ class _QrcodeViewState extends State<QrcodeView> {
               SizedBox(
                 height: 20,
               ),
+              Text(
+                "Welcom",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -100,13 +130,13 @@ class _QrcodeViewState extends State<QrcodeView> {
               ),
               SizedBox(
                 height: 30,
-              ),
-              if (chek1[0]["mes"]!="not data") // Replace yourCondition with the actual condition
+              ),if (chek1[0]["mes"]!="not data") // Replace yourCondition with the actual condition
             QrImageView(
               data: data,
               version: QrVersions.auto,
               size: 200.0,
-            )else
+            )
+          else
             Text(
               "Condition not met content",
               style: TextStyle(

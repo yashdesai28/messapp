@@ -8,7 +8,7 @@ class MhuserController extends GetxController {
 
 
   
-  static const baseurl = "http://192.168.43.54:8080/showmh";
+  static const baseurl = "http://172.20.10.3:8080/showmh";
 
   String pho = '';
   String fname='';

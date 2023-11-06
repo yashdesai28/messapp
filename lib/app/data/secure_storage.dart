@@ -18,6 +18,7 @@ class securestorage {
     await storage.delete(key: key);
   }
 
+
   storemeaddata(String key,String value)async{
     print(value);
     await storage.write(key:key,value:value);
@@ -31,6 +32,24 @@ class securestorage {
   }
 
   deletemealsdata(String key)async{
+      await storage.delete(key: key);
+  }
+
+
+  
+  gstoremeaddata(String key,String value)async{
+    print(value);
+    await storage.write(key:key,value:value);
+  }
+
+  greadmealsdata(String key)async {
+    String value = await storage.read(key: key) ?? 'No Data';
+    print('read data from secure storage :$value');
+
+    return value;
+  }
+
+  gdeletemealsdata(String key)async{
       await storage.delete(key: key);
   }
 

@@ -6,7 +6,7 @@ class ChangepasswordController extends GetxController {
 
   static uppass(Map data) async {
 
-    const baseurl = "http://192.168.43.54:8080/chpass";
+    const baseurl = "http://172.20.10.3:8080/chpass";
 
     try{
 

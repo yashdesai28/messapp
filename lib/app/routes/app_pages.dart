@@ -14,6 +14,8 @@ import '../modules/ghome/bindings/ghome_binding.dart';
 import '../modules/ghome/views/ghome_view.dart';
 import '../modules/gmenu/bindings/gmenu_binding.dart';
 import '../modules/gmenu/views/gmenu_view.dart';
+import '../modules/gqrcode/bindings/gqrcode_binding.dart';
+import '../modules/gqrcode/views/gqrcode_view.dart';
 import '../modules/guestanalysis/bindings/guestanalysis_binding.dart';
 import '../modules/guestanalysis/views/guestanalysis_view.dart';
 import '../modules/guesthome/bindings/guesthome_binding.dart';
@@ -205,6 +207,11 @@ class AppPages {
       name: _Paths.HOSTELERANALYSIS,
       page: () => const HosteleranalysisView(),
       binding: HosteleranalysisBinding(),
+    ),
+    GetPage(
+      name: _Paths.GQRCODE,
+      page: () => const GqrcodeView(),
+      binding: GqrcodeBinding(),
     ),
   ];
 }

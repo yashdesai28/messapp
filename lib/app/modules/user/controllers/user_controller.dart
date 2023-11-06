@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class UserController extends GetxController {
   //TODO: Implement UserController
 
-  static const baseurl = "http://192.168.43.54:8080/show";
+  static const baseurl = "http://172.20.10.3:8080/show";
 
   String pho = '';
   String fname='';
